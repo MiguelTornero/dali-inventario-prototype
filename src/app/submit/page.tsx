@@ -4,10 +4,10 @@ import Link from "next/link";
 export default function Home() {
   return (
     <Container>
-      <Typography align="center" marginY={2} variant="h3">Aplicacion inventario</Typography>
+      <Typography align="center" marginY={2} variant="h3">Dar de alta</Typography>
       <Stack spacing={2} marginY={2}>
         <Link href={"/submit"}>
-          <Button fullWidth variant="contained">Dar de alta</Button>
+          <Button variant="contained"> Dar de alta </Button>
         </Link>
       </Stack>
     </Container>
