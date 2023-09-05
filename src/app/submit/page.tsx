@@ -1,7 +1,7 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 
-export default function Home() {
+export default function Submit() {
   return (
     <Container>
       <Typography align="center" marginY={2} variant="h3">Dar de alta</Typography>
