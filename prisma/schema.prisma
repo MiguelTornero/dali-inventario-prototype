@@ -12,10 +12,12 @@ datasource db {
 
 model Item {
   id            Int       @id @default(autoincrement())
+  name          String
   createdAt     DateTime  @default(now())
+  lastModified  DateTime  @default(now())
   description   String?
   brand         String?
-  quantity      Int
-  lastCostCents Int
-  ref           String
+  quantity      Int       @default(0)
+  lastCostCents Int       @default(0)
+  ref           String?
 }
