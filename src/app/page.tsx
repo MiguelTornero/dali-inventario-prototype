@@ -13,6 +13,9 @@ export default function Home() {
         <Link href={"/submit"}>
           <Button fullWidth variant="contained">Dar de alta</Button>
         </Link>
+        <Link href={"/inventory"}>
+          <Button fullWidth variant="contained">Consultar inventario</Button>
+        </Link>
       </Stack>
     </Container>
   )
