@@ -15,7 +15,7 @@ export default function Submit() {
             <TextField placeholder="Nombre" name="name" required/>
             <TextField placeholder="Marca" name="brand"/>
             <TextField placeholder="Descripcion" name="description"/>
-            <TextField placeholder="Costo" name="lastCostCents" type="number" inputProps={{step: "0.01"}}/>
+            <TextField placeholder="Costo" name="lastCost" type="number" inputProps={{step: "0.01"}}/>
             <TextField placeholder="Referencia" name="ref"/>
             <Button type="submit" fullWidth variant="contained">Dar de alta</Button>
           </Stack>

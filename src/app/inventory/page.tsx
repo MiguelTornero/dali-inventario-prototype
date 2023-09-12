@@ -1,6 +1,7 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { getItems } from "../db";
+import InventoryItem from "../components/inventoryItem";
 
 export default async function Inventory() {
   const results = await getItems(100, 0)
@@ -13,11 +14,7 @@ export default async function Inventory() {
           <Button variant="contained">Regresar</Button>
         </Link>
         {results.map((v)=>(
-          <div id={v.id.toString()}>
-          <pre>
-            {JSON.stringify(v, null, 4)}
-          </pre>
-          </div>
+          <InventoryItem key={v.id} itemData={v}></InventoryItem>
         ))}
       </Stack>
     </Container>
