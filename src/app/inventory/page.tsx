@@ -12,6 +12,13 @@ export default async function Inventory() {
         <Link href={"/"}>
           <Button variant="contained">Regresar</Button>
         </Link>
+        {results.map((v)=>(
+          <div id={v.id.toString()}>
+          <pre>
+            {JSON.stringify(v, null, 4)}
+          </pre>
+          </div>
+        ))}
       </Stack>
     </Container>
   )

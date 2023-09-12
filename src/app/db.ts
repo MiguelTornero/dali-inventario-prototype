@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 // Boilerplate so the db connection is saved between reloads
 const globalForPrisma = globalThis as unknown as {
@@ -23,4 +23,8 @@ export async function getItems(limit: number, skip: number, sort: ('name' | 'cre
           [sort]: desc ? 'desc' : 'asc'
         }
     })
+}
+
+export async function addItem(itemData: Prisma.ItemCreateInput) {
+  return await prisma.item.create({data: itemData})
 }

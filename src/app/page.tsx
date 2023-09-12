@@ -1,10 +1,6 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 
-async function checkDB() {
-  
-}
-
 export default function Home() {
   return (
     <Container>

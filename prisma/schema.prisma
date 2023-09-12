@@ -18,6 +18,6 @@ model Item {
   description   String?
   brand         String?
   quantity      Int       @default(0)
-  lastCostCents Int       @default(0)
+  lastCost      Decimal   @default(0)
   ref           String?
 }
