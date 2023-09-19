@@ -1,12 +1,13 @@
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { Item } from "@prisma/client";
+import Link from "next/link";
 
 type InventoryItemProps = {
     itemData : Item
 }
 
 export default function InventoryItem({itemData} : InventoryItemProps) {
-    return <Stack sx={{outline: "solid"}}>
+    return <Stack sx={{outline: "solid"}} padding={1}>
         <Stack direction={"row"} spacing={1}>
             <Typography fontWeight={"bold"}>Nombre: </Typography>
             <Typography>{itemData.name}</Typography>
@@ -35,5 +36,8 @@ export default function InventoryItem({itemData} : InventoryItemProps) {
             <Typography fontWeight={"bold"}>Ultima modificacion: </Typography>
             <Typography>{itemData.lastModified.toISOString()}</Typography>
         </Stack>
+        <Link href={`/item/${itemData.id}`}>
+            <Button fullWidth>Mas infomacion</Button>
+        </Link>
     </Stack>
 }
