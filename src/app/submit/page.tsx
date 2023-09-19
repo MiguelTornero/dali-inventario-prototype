@@ -1,8 +1,19 @@
+'use client'
+
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { submitItem } from "../actions";
+import { useRef } from "react";
 
 export default function Submit() {
+
+  const form = useRef<HTMLFormElement>(null)
+
+  async function onCreate(formData: FormData) {
+    await submitItem(formData)
+    form.current?.reset()
+  }
+
   return (
     <Container>
       <Typography align="center" marginY={2} variant="h3">Dar de alta</Typography>
@@ -10,7 +21,7 @@ export default function Submit() {
         <Link href={"/"}>
           <Button variant="contained">Regresar</Button>
         </Link>
-        <form action={submitItem}>
+        <form ref={form} action={onCreate}>
           <Stack spacing={2}>
             <TextField placeholder="Nombre" name="name" required/>
             <TextField placeholder="Marca" name="brand"/>

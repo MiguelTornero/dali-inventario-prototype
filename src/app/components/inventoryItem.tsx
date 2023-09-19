@@ -6,7 +6,7 @@ type InventoryItemProps = {
 }
 
 export default function InventoryItem({itemData} : InventoryItemProps) {
-    return <Stack>
+    return <Stack sx={{outline: "solid"}}>
         <Stack direction={"row"} spacing={1}>
             <Typography fontWeight={"bold"}>Nombre: </Typography>
             <Typography>{itemData.name}</Typography>

@@ -20,4 +20,5 @@ model Item {
   quantity      Int       @default(0)
   lastCost      Decimal   @default(0)
   ref           String?
+  enabled       Boolean   @default(true)
 }

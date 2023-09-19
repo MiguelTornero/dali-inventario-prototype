@@ -15,12 +15,12 @@ const globalForPrisma = globalThis as unknown as {
   if (process.env.NODE_ENV !== "production") { globalForPrisma.prisma = prisma; }
 // End of boilerplate
 
-export async function getItems(limit: number, skip: number, sort: ('name' | 'createdAt' | 'lastModified' | 'quantity' | 'lastCostCents') = 'name', desc = true) {
+export async function getItems(limit: number, skip: number, sort: ('name' | 'createdAt' | 'lastModified' | 'quantity' | 'lastCostCents') = 'name', asc = true) {
     return prisma.item.findMany({
         skip: skip,
         take: limit,
         orderBy: {
-          [sort]: desc ? 'desc' : 'asc'
+          [sort]: asc ? 'asc' : 'desc'
         }
     })
 }
