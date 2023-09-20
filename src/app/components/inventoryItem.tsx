@@ -1,9 +1,10 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { Item } from "@prisma/client";
 import Link from "next/link";
+import { PlainItem } from "../db";
 
 type InventoryItemProps = {
-    itemData : Item
+    itemData : PlainItem
 }
 
 export default function InventoryItem({itemData} : InventoryItemProps) {
@@ -22,7 +23,7 @@ export default function InventoryItem({itemData} : InventoryItemProps) {
             </Stack>
         <Stack direction={"row"} spacing={1}>
             <Typography fontWeight={"bold"}>Ultimo costo:</Typography>{' '}
-            <Typography>{itemData.lastCost.toString()}</Typography>
+            <Typography>{itemData.lastCost}</Typography>
             </Stack>
         <Stack direction={"row"} spacing={1}>
             <Typography fontWeight={"bold"}>Cantidad: </Typography>
