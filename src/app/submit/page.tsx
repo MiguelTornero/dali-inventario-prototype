@@ -10,7 +10,11 @@ export default function Submit() {
   const form = useRef<HTMLFormElement>(null)
 
   async function onCreate(formData: FormData) {
-    await submitItem(formData)
+    const res = await submitItem(formData)
+    if (!res.ok) {
+      return alert(res.message)
+    }
+    alert("Producto subido con exito")
     form.current?.reset()
   }
 

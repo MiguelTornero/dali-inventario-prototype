@@ -1,12 +1,13 @@
 'use client'
 
-import { Button, FormControlLabel, Grid, Switch } from "@mui/material"
+import { Button, FormControlLabel, Grid, Stack, Switch, Typography } from "@mui/material"
 import ControlledTextField from "./ControlledTextField"
-import { Item } from "@prisma/client"
 import { useState } from "react"
 import QRCode from "react-qr-code"
-import { editItem } from "../actions"
+import { deleteItemAction, editItem } from "../actions"
 import { PlainItem } from "../db"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 type ItemPageFormProps = {
     itemData: PlainItem
@@ -15,15 +16,37 @@ type ItemPageFormProps = {
 const handleAction = async(formData: FormData) => {
     console.log(formData)
     const res = await editItem(formData)
+    if (!res.ok) {
+        return alert(res.message)
+    }
+    alert("Producto actualizado con exito")
 }
 
 export default function ItemPageForm({itemData}:ItemPageFormProps) {
     const [disabled, setDisabled] = useState(true)
+    const { replace } = useRouter()
     const handleChange = (_: any, checked: boolean) => {
         setDisabled(!checked)
     }
+
+    const handleDelete = async (f: FormData) => {
+        const res = await deleteItemAction(f)
+        if (!res.ok) {
+            return alert(res.message)
+        }
+        return replace("/inventory")
+    }
+
     return <>
-    <FormControlLabel label="Editar" control={<Switch value={disabled} onChange={handleChange}/>}></FormControlLabel>
+    <Typography align="center" marginY={2} variant="h3">Informacion</Typography>
+    <Link href={"/inventory"}><Button variant="contained">Regresar</Button></Link>
+    <Stack direction={"row"} spacing={1} marginY={1} justifyContent={"space-between"}>
+        <FormControlLabel  label="Editar" control={<Switch value={disabled} onChange={handleChange}/>}></FormControlLabel>
+        <form onSubmit={(e) => confirm(`¿Borrar producto ${itemData.name} (ref: ${itemData.ref || "sin referencia"})?`) || e.preventDefault()} action={handleDelete}>
+            <input type="hidden" name="id" value={itemData.id.toString()}/>
+            <Button disabled={disabled} type="submit" variant="contained" color="error">Borrar</Button>
+        </form>
+    </Stack>
     <form action={handleAction}>
     <Grid container spacing={1}>
         <Grid item xs={12} md={6}>

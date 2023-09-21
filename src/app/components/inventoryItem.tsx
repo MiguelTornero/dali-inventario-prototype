@@ -1,5 +1,4 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { Item } from "@prisma/client";
 import Link from "next/link";
 import { PlainItem } from "../db";
 

@@ -1,7 +1,7 @@
 'use server'
 
 import { Decimal } from "@prisma/client/runtime/library"
-import { addItem, updateItemById } from "./db"
+import { addItem, disableItemById, updateItemById } from "./db"
 import { revalidatePath } from "next/cache"
 
 export type ActionResponse = {ok: false, message: string}|{ok: true}
@@ -30,12 +30,29 @@ export async function editItem(formData: FormData) : Promise<ActionResponse> {
     const ref = formData.get("ref")?.toString() || null
 
     if (lastCost.comparedTo(0) < 0) {
-        return {ok: false, message: "invalid cost"}
+        return {ok: false, message: "Costo invalido"}
+    }
+
+    if (!Number.isInteger(quantity) || quantity < 0) {
+        return {ok: false, message: "Cantidad invalida"}
     }
 
     await updateItemById(id, {name, brand, description, lastCost, quantity, ref, lastModified: new Date()})
 
     revalidatePath("/item/[id]")
+
+    return {ok: true}
+}
+
+export async function deleteItemAction(formData: FormData) : Promise<ActionResponse> {
+    const id = parseInt(formData.get("id")?.toString() || "NaN")
+    if (isNaN(id)) {
+        return {ok: false, message: "missing id"}
+    }
+
+    await disableItemById(id)
+
+    revalidatePath("/inventory")
 
     return {ok: true}
 }

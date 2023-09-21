@@ -13,9 +13,11 @@ export default async function Inventory() {
         <Link href={"/"}>
           <Button variant="contained">Regresar</Button>
         </Link>
-        {results.map((v)=>(
+        {results.length ?
+        results.map((v)=>(
           <InventoryItem key={v.id} itemData={v}></InventoryItem>
-        ))}
+        )) :
+        "El inventario esta vacio"}
       </Stack>
     </Container>
   )

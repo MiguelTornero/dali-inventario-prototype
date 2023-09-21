@@ -58,3 +58,14 @@ export async function updateItemById(id: number, data: Prisma.ItemUpdateInput) {
     data: data
   })
 }
+
+export async function disableItemById(id:number) {
+  return await prisma.item.update({
+    where: {
+      id: id
+    },
+    data: {
+      enabled: false
+    }
+  })
+}
